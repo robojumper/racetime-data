@@ -22,6 +22,7 @@ function Head2Head() {
 	const [loading, setLoading] = useState(false);
 	const [validSlug, setValidSlug] = useState(false);
 	const [currentSlugData, setCurrentSlugData] = useState<SlugData>();
+	const [loadingProgress, setLoadingProgress] = useState(0);
 	const updateFMTTableProps = (table: MUTable, newPlayersAdded: boolean) => {
 		const [nameList, recTable] = table.generateSortedTable();
 		setRecordTable(recTable);
@@ -38,6 +39,7 @@ function Head2Head() {
 			setCurrentSlugData(data);
 		});
 		setLoading(true);
+		setLoadingProgress(0);
 		try {
 			const pageLimit = await numPagesForGame(slug);
 			for (let i = 1; i <= pageLimit; i++) {
@@ -49,6 +51,7 @@ function Head2Head() {
 					clearTable();
 					return;
 				} else {
+					setLoadingProgress(Math.round(i * 1000 / pageLimit) / 10);
 					setMuTable(newTable);
 					updateFMTTableProps(newTable, newPlayersAdded);
 				}
@@ -86,7 +89,6 @@ function Head2Head() {
 			{validSlug && (
 				currentSlugData !== undefined && (
 					<span>
-						Selected Game:{" "}
 						<a
 							style={{ color: "cyan" }}
 							href={`${RACETIME}${currentSlugData.url}`}
@@ -95,8 +97,8 @@ function Head2Head() {
 						>
 							{currentSlugData.name}
 						</a>
-						. {muTable.raceArray.length} total recorded race{muTable.raceArray.length === 1 ? "" : "s"} loaded
-						{loading ? " so far." : "."}
+						{" - "}{muTable.raceArray.length} recorded race{muTable.raceArray.length === 1 ? "" : "s"} loaded
+						{loading ? ` so far (~${loadingProgress}%)...` : "."}
 					</span>
 				)
 			)}
