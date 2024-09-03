@@ -1,30 +1,30 @@
 import { useState } from "react";
 import "./CategoryLauncher.css";
-import { isValidSlug, getRecordableGoals } from "./Loader";
+import { isValidSlug } from "./Loader";
 type CLProps = {
 	setTableSlug: (slug: string, validity: boolean) => Promise<void>;
 	setTableGoal: (goal: string) => void;
+	goalRaceMap: Map<string, Set<number>>;
 };
 
 export default function CategoryLauncher(props: CLProps) {
-	const { setTableSlug, setTableGoal } = props;
+	const { setTableSlug, setTableGoal, goalRaceMap } = props;
 
 	const updateSlug = (newSlug: string) => {
+		setSlug(newSlug);
 		isValidSlug(newSlug).then((valid) => {
 			setValidSlug(valid);
-			setTableSlug(newSlug, valid);
-			if (valid) {
-				getRecordableGoals(newSlug).then((goals) => {
-					setGoalList(goals);
-				});
-			} else {
-				setGoalList([]);
-			}
 		});
 	};
 
+	const submitSlug = () => {
+		if (validSlug) {
+			setTableSlug(slug, true);
+		}
+	};
+
+	const [slug, setSlug] = useState("");
 	const [validSlug, setValidSlug] = useState(false);
-	const [goalList, setGoalList] = useState<Array<string>>([]);
 
 	return (
 		<div className="inputRow">
@@ -34,20 +34,26 @@ export default function CategoryLauncher(props: CLProps) {
 					href="https://github.com/YourAverageLink/racetime-data"
 					target="_blank"
 					rel="noreferrer">
-						RaceTime Data Visualizer
+					RaceTime Data Visualizer
 				</a>
 				! Enter a slug (e.g., lozssr,
 				twwr) to get started.
 			</span>
-			<form>
+			<form
+				onSubmit={(event) => {
+					event.preventDefault();
+					submitSlug();
+				}}
+			>
 				<input
 					type="text"
 					onChange={(string) => {
 						updateSlug(string.currentTarget.value);
 					}}
-				/>
+
+				/><span style={{ verticalAlign: "middle", marginLeft: "5px" }}>{validSlug ? "✅ Press Enter to load this game's races." : "❌ Please enter a valid slug."}</span>
 			</form>
-			{validSlug && (
+			{goalRaceMap.size !== 0 && (
 				<div>
 					<select
 						name="goal"
@@ -57,9 +63,9 @@ export default function CategoryLauncher(props: CLProps) {
 						<option selected disabled value="">
 							Select a goal:
 						</option>
-						{goalList.map((goalName, idx) => (
+						{Array.from(goalRaceMap.keys()).map((goalName, idx) => (
 							<option value={goalName} key={idx}>
-								{goalName}
+								{goalName} ({goalRaceMap.get(goalName)?.size} race{goalRaceMap.get(goalName)?.size === 1 ? "" : "s"})
 							</option>
 						))}
 					</select>

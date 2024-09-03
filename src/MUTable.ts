@@ -45,6 +45,7 @@ class MUTable {
     raceArray: Array<RaceData> = [];
     playerRaceMap = new Map<string, MUEntrant>();
     goal: string = "";
+    goalRaceMap = new Map<string, Set<number>>();
 
     /** Returns the intersection of two sets of races, filtered by the currently selected goal. */
     intersectByGoal(set1: Set<number>, set2: Set<number>): Set<number> {
@@ -151,6 +152,10 @@ class MUTable {
     processRace(race: RaceData): boolean {
         const arrayID = this.raceArray.length;
         this.raceArray.push(race);
+        if (!this.goalRaceMap.has(race.goal.name)) {
+            this.goalRaceMap.set(race.goal.name, new Set<number>());
+        }
+        this.goalRaceMap.get(race.goal.name)?.add(arrayID);
         let newPlayersAdded = false;
         for (const entrant of race.entrants) {
             const { user } = entrant;
@@ -182,6 +187,7 @@ class MUTable {
         this.goal = "";
         this.raceArray = [];
         this.playerRaceMap = new Map<string, MUEntrant>();
+        this.goalRaceMap = new Map<string, Set<number>>();
     }
 
 }

@@ -80,11 +80,10 @@ function Head2Head() {
 				<CategoryLauncher
 					setTableSlug={setTableSlug}
 					setTableGoal={setTableGoal}
+					goalRaceMap={muTable.goalRaceMap}
 				/>
 			</div>
-			{!validSlug ? (
-				<span>Please select a valid slug.</span>
-			) : (
+			{validSlug && (
 				currentSlugData !== undefined && (
 					<span>
 						Selected Game:{" "}
@@ -96,29 +95,24 @@ function Head2Head() {
 						>
 							{currentSlugData.name}
 						</a>
-						. {muTable.raceArray.length} total recorded races loaded
+						. {muTable.raceArray.length} total recorded race{muTable.raceArray.length === 1 ? "" : "s"} loaded
 						{loading ? " so far." : "."}
 					</span>
 				)
 			)}
-			{validSlug && (recordTable.size !== 0 ? (
-				<div className="fmtTbl">
-					<FormattedTable
-						playerNameList={playerNameList}
-						recordTable={recordTable}
-						userInfoMap={userInfoMap}
-					/>
-				</div>
-			) : muTable.goal === "" ? (
-				<span>Select a goal and a Head2Head table will appear here.</span>
-			) : (
-				currentSlugData !== undefined && (
-					<span>
-						There are no recorded races for {muTable.goal}
-						{loading ? " (some may not have been loaded yet)." : "."}
-					</span>
+			{validSlug &&
+				(recordTable.size !== 0 ? (
+					<div className="fmtTbl">
+						<FormattedTable
+							playerNameList={playerNameList}
+							recordTable={recordTable}
+							userInfoMap={userInfoMap}
+						/>
+					</div>
+				) : muTable.goal === "" && (
+					<span>Select a goal and a Head2Head table will appear here.</span>
 				)
-			))}
+			)}
 		</div>
 	);
 }
