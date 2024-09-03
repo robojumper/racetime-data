@@ -101,7 +101,7 @@ function Head2Head() {
 					</span>
 				)
 			)}
-			{recordTable.size !== 0 ? (
+			{validSlug && (recordTable.size !== 0 ? (
 				<div className="fmtTbl">
 					<FormattedTable
 						playerNameList={playerNameList}
@@ -118,7 +118,7 @@ function Head2Head() {
 						{loading ? " (some may not have been loaded yet)." : "."}
 					</span>
 				)
-			)}
+			))}
 		</div>
 	);
 }

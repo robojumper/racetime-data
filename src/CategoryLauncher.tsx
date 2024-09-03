@@ -29,7 +29,14 @@ export default function CategoryLauncher(props: CLProps) {
 	return (
 		<div className="inputRow">
 			<span>
-				Welcome to the RaceTime Data Visualizer! Enter a slug (e.g., lozssr,
+				Welcome to the{" "}
+				<a style={{ color: "cyan" }}
+					href="https://github.com/YourAverageLink/racetime-data"
+					target="_blank"
+					rel="noreferrer">
+						RaceTime Data Visualizer
+				</a>
+				! Enter a slug (e.g., lozssr,
 				twwr) to get started.
 			</span>
 			<form>
