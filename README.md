@@ -1,46 +1,9 @@
-# Getting Started with Create React App
+# RaceTime Data Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web app I created to automate the process of calculating a Head2Head sheet for races held on [RaceTime.gg](https://racetime.gg/). It fetches data from RaceTime's public API endpoints. Currently, you can enter any game's slug (e.g., `lozssr` for Skyward Sword Randomizer, or `twwr` for The Wind Waker Randomizer), and select any of its current recordable goals, and a Head2Head table will begin populating its cells. RaceTime's API only gives data for 10 races at a time, so it may take some time for all of a game's races to be loaded in. The table will update in real time. Do note that changing goals will not clear out the table (it only filters which races are counted), but changing the slug *will* reset the table.
 
-## Available Scripts
+The table is sorted by the sum of each player's win rate against each other player. For sorting purposes, an empty record counts as a 25% win rate. This is an arbitrary choice, but it is meant to place those with few matches above those who have lost many matches.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### TODO
+- Add general data page (could display number of 1st, 2nd, and 3rd place finishes, win rate, etc.)
+- Add click functionality for Head2Head cells (display a list of races two players faced off in)

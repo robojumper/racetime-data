@@ -1,0 +1,96 @@
+.innerContainer {
+    font-size: 1.5vmin;
+    border: 1px dotted lightgray;
+    overscroll-behavior: none;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: calc(5vh + 8px);
+    margin-top: 8px;
+    overflow: auto;
+    max-height: calc(83vh - 52px);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table tr:nth-child(odd) td{
+    background-color: #181818;
+}
+
+table tr:nth-child(even) td{
+    background-color: black;
+}
+
+.cornerCell {
+    position: sticky;
+    font-size: 2vmin;
+    z-index: 4;
+    left: 0;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background-color: black;
+    word-wrap: break-word;
+    z-index: 2;
+    max-width: 12em;
+    font-size: 1.25vmin;
+}
+
+tbody {
+    overflow: auto;
+    z-index: 1;
+}
+
+.leftmost {
+    min-width: 25vmin;
+    max-width: 25vmin;
+    min-height: 2vmin;
+    position: sticky;
+    left: 0;
+}
+
+.playerNameLeft {
+    font-size: 1.6vmin;
+    text-align: center;
+    vertical-align: center;
+}
+
+td {
+    border: 1px dotted lightgray;
+    min-width: 8.5vmin;
+    max-width: 8.5vmin;
+}
+.posRec {
+    color: #30cc30;
+}
+
+.negRec {
+    color: #e35f5f;
+}
+
+.neutralRec {
+    color: #e8c957;
+}
+
+.topPfp {
+    width: 6vmin;
+    height: 6vmin;
+    display: block;
+    margin: 0 auto;
+    margin-top: 2px;
+    margin-bottom: 6px;
+}
+
+.leftPfp {
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: 2px;
+    vertical-align: middle;
+}
+
+.h2h {
+    font-size: 2vmin;
+}
