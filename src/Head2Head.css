@@ -1,0 +1,16 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    height: 100%;
+}
+
+.catLaunch {
+    flex: 0 1 auto;
+}
+
+.fmtTbl {
+    flex: 1 1 auto;
+    height: 100%;
+}
